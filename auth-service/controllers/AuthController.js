@@ -1,6 +1,6 @@
 const User = require('../models/UserSchema')
 const jwt = require('jsonwebtoken')
-const JWT_SECRET = process.env.JWT_SECRET || 'secret'
+const JWT_SECRET = process.env.JWT_SECRET
 
 // register account route
 const register = async (req, res) => {
