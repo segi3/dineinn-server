@@ -1,0 +1,23 @@
+{
+  "name": "dineinn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "isAuthenticated.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://segi3:06674cdbeb172f19d2141fcb6424bb40ed0da046@github.com/segi3/dineinn-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/segi3/dineinn-server/issues"
+  },
+  "homepage": "https://github.com/segi3/dineinn-server#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
+  }
+}
