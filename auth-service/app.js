@@ -16,6 +16,6 @@ const AuthRoutes = require('./routes/AuthRoute')
 app.use('/auth', AuthRoutes)
 
 app.listen(PORT, async () => {
-    console.log(`${process.env.SERVICE_NAME} is now running at ${PORT}`)
+    console.log(`${process.env.SERVICE_NAME || 'Auth-Service' } is now running at ${PORT}`)
     await mongodb()
 })
