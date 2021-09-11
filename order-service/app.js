@@ -3,19 +3,23 @@ const app = express()
 
 const PORT = process.env.PORT_ONE || 3030
 
-const mongoose = require("mongoose")
 const jwt = require("jsonwebtoken")
 
-mongoose.connect(
-    "mongodb://localhost/dineinn-order-service",
-    {
+const mongoose = require('mongoose')
+const MONGOPATH = process.env.MONGOPATH || 'mongodb://localhost/dineinn'
+
+const mongodb = async() => {
+    await mongoose.connect(MONGOPATH, {
+        keepAlive: true,
         useNewUrlParser: true,
-        useUnifiedTopology: true,
-    },
-    () => {
-        console.log(`Product-Service DB Connected`)
-    }
-)
+        useUnifiedTopology: true
+    }, (err)=> {
+        if (err) console.log(err)
+        console.log(`Order service db connected`)
+    })
+    
+    return mongoose
+}
 
 app.use(express.json())
 
@@ -73,6 +77,31 @@ amqp_connect().then( () => {
     })
 })
 
-app.listen(PORT, () => {
+// tmp
+const Product = require('./models/ProductSchema')
+
+app.post('/order/getAll', isAuthenticated, async (req, res) => {
+
+    const orders = await Order.find({ user: req.user.email })
+
+    var resmes = []
+
+    // console.log(orders[0].products[0]._id.toString())
+
+    for (let i = 0; i<orders.length; i++) {
+        let oneProduct = await Product.find({ _id: orders[i].products[0]._id })
+        // console.log(oneProduct)
+        resmes.push({
+            user: req.user,
+            order: orders[i],
+            product: oneProduct[0]
+        })
+    }
+
+    return res.json(resmes)
+})
+
+app.listen(PORT, async () => {
     console.log(`Order-Service at ${PORT}`)
-});
+    await mongodb()
+})

@@ -11,10 +11,9 @@ app.use(express.json())
 // rabbit mq
 // docker run -p 5672:5672 -p 15672:15672 rabbitmq:management
 
-
-
 // route
 const ProductRoutes = require('./routes/ProductRoute')
+const isAuthenticated = require("../utils/middleware/isAuthenticated")
 
 app.use('/product', ProductRoutes)
 
@@ -46,6 +45,7 @@ app.use('/product', ProductRoutes)
 //         userEmail: req.user.email
 //     })))
 // })
+
 
 
 app.listen(PORT, async () => {

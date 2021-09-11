@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const MONGOPATH = process.env.MONGOPATH || 'mongodb://localhost/dineinn-product-service'
+const MONGOPATH = process.env.MONGOPATH || 'mongodb://localhost/dineinn'
 
 module.exports = async() => {
     await mongoose.connect(MONGOPATH, {
